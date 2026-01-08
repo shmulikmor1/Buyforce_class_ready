@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: my-postgres-fresh
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: BuyForce_sql
+    ports:
+      - "5438:5432"  # פורט חיצוני 5438 כדי למנוע התנגשות
+    volumes:
+      - pgdata_fresh:/var/lib/postgresql/data  # volume חדש
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+
+volumes:
+  pgdata_fresh:
